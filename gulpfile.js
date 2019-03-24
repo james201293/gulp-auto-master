@@ -7,7 +7,7 @@
 
 const gulp = require('gulp');
 const gulpSass = require('gulp-sass');
-const spritesmith = require('spritesmith');
+const spritesmith = require('gulp.spritesmith');
 const gulpCleanCss = require('gulp-clean-css');
 const gulpImagemin = require('gulp-imagemin');
 //server
@@ -29,7 +29,7 @@ const buildSass = function(cb){
 
 const compressImage = async function(cb){
     console.log('compressImage');
-    gulp.src('./src/images/*')
+    gulp.src('src/images/*')
         .pipe(gulpImagemin())
         .pipe(gulp.dest('build/images'));
     cb();
@@ -44,7 +44,7 @@ const webFont = async function(cb){
 
 const CSSSprite = async function(cb){
     console.log('CSSSprite');
-    gulp.src('./src/sprite/*.png').pipe(spritesmith({
+    gulp.src('src/sprite/*.png').pipe(spritesmith({
         imgName: 'sprite.png',
         cssName: 'sprite.css'
     }))
@@ -72,6 +72,23 @@ gulp.watch('src/**/*.scss', { events: 'all' }, function(cb){
     cb();
 });
 
+gulp.watch('src/images/*', { events: 'all' }, function(cb){
+    console.log('compressImage');
+    compressImage(cb);
+    cb();
+});
+
+gulp.watch('./src/fonts/*', { events: 'all' }, function(cb){
+    console.log('webFont');
+    webFont(cb);
+    cb();
+});
+
+gulp.watch('src/sprite/*.png', { events: 'all' }, function(cb){
+    console.log('CSSSprite');
+    CSSSprite(cb);
+    cb();
+});
 
 //exports.default = buildSass;
 exports.default = gulp.series(buildSass, compressImage, webFont, CSSSprite, webServer);
