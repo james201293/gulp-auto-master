@@ -31,7 +31,8 @@ const compressImage = async function(cb){
     console.log('compressImage');
     gulp.src('src/images/*')
         .pipe(gulpImagemin())
-        .pipe(gulp.dest('build/images'));
+        .pipe(gulp.dest('build/images'))
+        .pipe(connect.reload());
     cb();
 }
 
