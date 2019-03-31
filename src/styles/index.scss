@@ -1,7 +1,7 @@
-//@import "font-awesome/fontawesome";
-//
-//@import "font-awesome/brands.scss";
-//@import "font-awesome/solid.scss";
+@import "font-awesome/fontawesome";
+
+@import "font-awesome/brands.scss";
+@import "font-awesome/solid.scss";
 
 /*  樣式變數定義  */
 
@@ -16,13 +16,14 @@
 
 @import "global";
 
-.logo.icon-logo{
+.blog-header-logo{
   display: inline-block;
   width: 74px;
   height: 74px;
   background-size: 84px;
   background-repeat: no-repeat;
   text-indent: -9999px;
+  background-image: url("../images/logo.png");
 }
 
 .social-list{
@@ -99,7 +100,7 @@
   }
 }
 
-/*
+
 .user {
   @extend %fa-icon;
   @extend .fas;
@@ -107,4 +108,4 @@
   &:before {
     content: fa-content($fa-var-user);
   }
-}*/
+}
